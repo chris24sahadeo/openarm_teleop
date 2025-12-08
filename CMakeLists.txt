@@ -50,8 +50,8 @@ target_include_directories(openarm_teleop_lib
 
 target_link_libraries(
   openarm_teleop_lib
-  PUBLIC OpenArmCAN::openarm_can Eigen3::Eigen ${orocos_kdl_LIBRARIES}
-         ${kdl_parser_LIBRARIES} urdfdom::urdfdom_model yaml-cpp::yaml-cpp)
+  PUBLIC OpenArmCAN::openarm_can Eigen3::Eigen orocos-kdl
+         kdl_parser::kdl_parser urdfdom::urdfdom_model yaml-cpp::yaml-cpp)
 
 # -----------------------------
 # Executables

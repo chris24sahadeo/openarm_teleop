@@ -15,16 +15,16 @@
 # limitations under the License.
 
 # ======== Configuration ========
-ARM_SIDE=${1:-right_arm}
-CAN_IF=${2:-can0}
+ARM_SIDE=${1:-left_arm}
+CAN_IF=${2:-leader_l}
 ARM_TYPE=${3:-v10}
 TMPDIR="/tmp/openarm_urdf_gen"
 URDF_NAME="${ARM_TYPE}_bimanual.urdf"
 XACRO_FILE="${ARM_TYPE}.urdf.xacro"
-WS_DIR=~/openarm_ros2_ws
+WS_DIR=/home/chris/git/openarm_teleop/ros_ws
 XACRO_PATH="$WS_DIR/src/openarm_description/urdf/robot/$XACRO_FILE"
 URDF_OUT="$TMPDIR/$URDF_NAME"
-BIN_PATH=~/openarm_teleop/build/gravity_comp # adjust if needed
+BIN_PATH=/home/chris/git/openarm_teleop/build/gravity_comp # adjust if needed
 # ===============================
 # Check workspace
 if [ ! -d "$WS_DIR" ]; then
