@@ -15,9 +15,9 @@
 # limitations under the License.
 
 # ========= Configuration =========
-ARM_SIDE=${1:-right_arm} # Required: left_arm or right_arm
-LEADER_CAN_IF=$2         # Optional: leader CAN interface
-FOLLOWER_CAN_IF=$3       # Optional: follower CAN interface
+ARM_SIDE=${1:-left_arm} # Required: left_arm or right_arm
+LEADER_CAN_IF=${2:-leader_l}         # Optional: leader CAN interface
+FOLLOWER_CAN_IF=${3:-follower_l}       # Optional: follower CAN interface
 ARM_TYPE="v10"           # Fixed for now
 TMPDIR="/tmp/openarm_urdf_gen"
 
@@ -49,9 +49,9 @@ fi
 LEADER_URDF_PATH="$TMPDIR/${ARM_TYPE}_leader.urdf"
 FOLLOWER_URDF_PATH="$TMPDIR/${ARM_TYPE}_follower.urdf"
 XACRO_FILE="$ARM_TYPE.urdf.xacro"
-WS_DIR=~/openarm_ros2_ws
+WS_DIR=/home/chris/git/openarm_teleop/ros_ws
 XACRO_PATH="$WS_DIR/src/openarm_description/urdf/robot/$XACRO_FILE"
-BIN_PATH=~/openarm_teleop_tmp/build/bilateral_control
+BIN_PATH=~/git/openarm_teleop/build/bilateral_control
 echo $BIN_PATH
 # ================================
 # Check workspace

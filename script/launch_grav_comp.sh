@@ -16,6 +16,7 @@
 
 # ======== Configuration ========
 ARM_SIDE=${1:-left_arm}
+# CAN_IF=${2:-follower_l}
 CAN_IF=${2:-leader_l}
 ARM_TYPE=${3:-v10}
 TMPDIR="/tmp/openarm_urdf_gen"

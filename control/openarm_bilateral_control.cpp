@@ -19,6 +19,7 @@
 #include <csignal>
 #include <filesystem>
 #include <iostream>
+#include <motor_utils.hpp>
 #include <openarm/can/socket/openarm.hpp>
 #include <openarm/damiao_motor/dm_motor_constants.hpp>
 #include <openarm_port/openarm_init.hpp>
@@ -234,11 +235,15 @@ int main(int argc, char **argv) {
 
         std::cout << "=== Initializing Leader OpenArm ===" << std::endl;
         openarm::can::socket::OpenArm *leader_openarm =
-            openarm_init::OpenArmInitializer::initialize_openarm(leader_can_interface, true);
+            openarm_init::OpenArmInitializer::initialize_openarm(leader_can_interface, false);
 
         std::cout << "=== Initializing Follower OpenArm ===" << std::endl;
         openarm::can::socket::OpenArm *follower_openarm =
-            openarm_init::OpenArmInitializer::initialize_openarm(follower_can_interface, true);
+            openarm_init::OpenArmInitializer::initialize_openarm(follower_can_interface, false);
+
+        // Set MIT mode for all motors
+        set_control_mode_all(leader_openarm, 1);
+        set_control_mode_all(follower_openarm, 1);
 
         size_t leader_arm_motor_num = leader_openarm->get_arm().get_motors().size();
         size_t follower_arm_motor_num = follower_openarm->get_arm().get_motors().size();
@@ -273,10 +278,10 @@ int main(int argc, char **argv) {
                                        follower_Fv, follower_Fo);
 
         // set home postion
-        std::thread thread_l(&Control::AdjustPosition, control_leader);
-        std::thread thread_f(&Control::AdjustPosition, control_follower);
-        thread_l.join();
-        thread_f.join();
+        // std::thread thread_l(&Control::AdjustPosition, control_leader);
+        // std::thread thread_f(&Control::AdjustPosition, control_follower);
+        // thread_l.join();
+        // thread_f.join();
 
         // Start control process
         LeaderArmThread leader_thread(leader_state, control_leader, FREQUENCY);
